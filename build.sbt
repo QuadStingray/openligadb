@@ -1,0 +1,20 @@
+name := "openligadb"
+
+version := "0.0.1"
+
+scalaVersion := "2.12.4"
+
+// Tests
+libraryDependencies ++= Seq(
+  "org.specs2" %% "specs2-core" % "4.0.1" % "test",
+  "junit" % "junit" % "4.12" % "test"
+)
+
+libraryDependencies ++= Seq(
+  "com.typesafe.akka" %% "akka-http" % "10.0.10",
+  "org.json4s" %% "json4s-native" % "3.5.3",
+  "joda-time" % "joda-time" % "2.9.9"
+)
+libraryDependencies += "org.cache2k" % "cache2k-api" % "1.0.1.Final"
+
+libraryDependencies += "org.cache2k" % "cache2k-core" % "1.0.1.Final"
