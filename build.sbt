@@ -1,5 +1,7 @@
 name := "openligadb"
 
+organization := "com.quadstingray"
+
 version := "0.0.1"
 
 scalaVersion := "2.12.4"
@@ -22,4 +24,4 @@ libraryDependencies += "org.cache2k" % "cache2k-api" % "1.0.1.Final"
 
 libraryDependencies += "org.cache2k" % "cache2k-core" % "1.0.1.Final"
 
-// bintrayReleaseOnPublish in ThisBuild := false
+bintrayReleaseOnPublish in ThisBuild := false

@@ -1,6 +1,8 @@
+addSbtPlugin("com.orrsella" % "sbt-stats" % "1.0.7")
+
 addSbtPlugin("org.scalastyle" %% "scalastyle-sbt-plugin" % "1.0.0")
 
-addSbtPlugin("com.orrsella" % "sbt-stats" % "1.0.7")
+addSbtPlugin("org.scalariform" % "sbt-scalariform" % "1.8.0")
 
 addSbtPlugin("net.virtual-void" % "sbt-dependency-graph" % "0.9.0")
 
