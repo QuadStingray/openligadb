@@ -1,0 +1,25 @@
+language: scala
+services: mongodb
+
+scala:
+   - 2.12.4
+
+branches:
+  only:
+    - master
+
+notifications:
+  email:
+    recipients:
+      - github@quadstingray.com
+
+jdk:
+  - oraclejdk8
+  - oraclejdk9
+  - openjdk7
+
+sudo: false
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
