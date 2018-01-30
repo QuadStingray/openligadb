@@ -39,7 +39,7 @@ class CacheSpec extends org.specs2.mutable.Specification {
 
       cacheInfo.getGetCount must beGreaterThan(cacheInfo.getPutCount)
 
-      cacheInfo.getPutCount must beEqualTo(cacheInfo.getMissCount)
+      cacheInfo.getPutCount must between(cacheInfo.getMissCount - 5, cacheInfo.getMissCount + 5)
 
     }
 
