@@ -24,4 +24,8 @@ libraryDependencies += "org.cache2k" % "cache2k-api" % "1.0.1.Final"
 
 libraryDependencies += "org.cache2k" % "cache2k-core" % "1.0.1.Final"
 
-bintrayReleaseOnPublish in ThisBuild := false
+resolvers += Resolver.jcenterRepo
+
+publishTo := Some("Bintray API Realm" at "https://api.bintray.com/content/:subject/:repo/:package/:version")
+
+// credentials += Credentials(new File("credentials.properties"))

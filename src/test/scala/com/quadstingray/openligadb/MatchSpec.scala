@@ -89,7 +89,9 @@ class MatchSpec extends org.specs2.mutable.Specification {
 
       game.team1.shortname must beEqualTo("BVB")
 
-      game.team1.iconUrl must beEqualTo("https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Borussia_Dortmund_logo.svg/20px-Borussia_Dortmund_logo.svg.png")
+      game.team1.iconUrl.contains("Borussia_Dortmund_logo") must beTrue
+
+      game.team1.iconUrl.contains(".png") must beTrue
 
       game.team1.name must beEqualTo("Borussia Dortmund")
 
@@ -97,7 +99,9 @@ class MatchSpec extends org.specs2.mutable.Specification {
 
       game.team2.shortname must beEqualTo("FC Bayern")
 
-      game.team2.iconUrl must beEqualTo("https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Logo_FC_Bayern_M%C3%BCnchen.svg/20px-Logo_FC_Bayern_M%C3%BCnchen.svg.png")
+      game.team2.iconUrl.contains("Logo_FC_Bayern_M") must beTrue
+
+      game.team2.iconUrl.contains(".png") must beTrue
 
       game.team2.name must beEqualTo("Bayern München")
     }

@@ -105,7 +105,9 @@ class SeasonSpec extends org.specs2.mutable.Specification {
 
       fcb.shortname must beEqualTo("FC Bayern")
 
-      fcb.iconUrl must beEqualTo("https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Logo_FC_Bayern_M%C3%BCnchen.svg/20px-Logo_FC_Bayern_M%C3%BCnchen.svg.png")
+      fcb.iconUrl.contains("Logo_FC_Bayern_M") must beTrue
+
+      fcb.iconUrl.contains(".png") must beTrue
 
     }
 
