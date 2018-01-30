@@ -28,4 +28,4 @@ resolvers += Resolver.jcenterRepo
 
 publishTo := Some("Bintray API Realm" at "https://api.bintray.com/content/:subject/:repo/:package/:version")
 
-// credentials += Credentials(new File("credentials.properties"))
+credentials += Credentials(new File("credentials.properties"))
