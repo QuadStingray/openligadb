@@ -26,6 +26,6 @@ libraryDependencies += "org.cache2k" % "cache2k-core" % "1.0.1.Final"
 
 resolvers += Resolver.jcenterRepo
 
-publishTo := Some("Bintray API Realm" at "https://api.bintray.com/content/:subject/:repo/:package/:version")
+publishTo := Some("Bintray API Realm" at "https://api.bintray.com/content/quadstingray/maven/%s/%s".format(name.value, version.value))
 
 credentials += Credentials(new File("credentials.properties"))
