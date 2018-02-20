@@ -4,9 +4,6 @@
 [![Build Status](https://travis-ci.org/QuadStingray/openligadb.svg?branch=master)](https://travis-ci.org/QuadStingray/openligadb)
 [ ![Download from Bintray](https://api.bintray.com/packages/quadstingray/maven/openligadb/images/download.svg) ](https://bintray.com/quadstingray/maven/openligadb/_latestVersion)
 
-# sbt-javafx
-[SBT](http://www.scala-sbt.org/) (Simple Build Tool) plugin for building JavaFx Application. The plugin is inspired by [Kavedaa Sbt Javafx](https://github.com/kavedaa/sbt-javafx)
-
 ## Documentation
 https://quadstingray.github.io/openligadb/
 
