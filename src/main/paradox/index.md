@@ -13,9 +13,12 @@ https://quadstingray.github.io/openligadb/
 ## Quick start
 Add to `build.sbt` the following content:
 
-```scala
-libraryDependencies += "com.quadstingray" % "openligadb" % "X.Y.Z"
+@@@ vars
+```sbt
+libraryDependencies += "com.quadstingray" % "openligadb" % "$project.version$"
 ```
+@@@
+
 
 ## Contributing
 If you find this project helpfull, so you can see here how you can help:
