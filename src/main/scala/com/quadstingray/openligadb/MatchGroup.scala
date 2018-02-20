@@ -6,7 +6,7 @@ import org.joda.time.DateTime
 
 case class MatchGroup(id: Long, season: Season, name: String, matchGroupOrderNumber: Int) {
 
-  def matches: List[Match] = OpenligaDbService.getMatchdataBySeasonAndGroup(season.league.shortName, season.year, matchGroupOrderNumber)
+  def matches: List[MatchData] = OpenligaDbService.getMatchdataBySeasonAndGroup(season.league.shortName, season.year, matchGroupOrderNumber)
 
   def lastChangeDate: DateTime = ???
 

@@ -5,6 +5,7 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.unmarshalling.Unmarshal
 import akka.stream.{ActorMaterializer, Materializer}
+import com.typesafe.scalalogging.LazyLogging
 import org.json4s.DefaultFormats
 import org.json4s.Xml.toJson
 import org.json4s.native.Serialization._
@@ -15,10 +16,10 @@ import scala.concurrent.{Await, Future}
 import scala.xml.factory.XMLLoader
 import scala.xml.{Elem, Node, SAXParser}
 
-private[openligadb] abstract class HttpService {
-  implicit val defaultFormats = DefaultFormats
-  implicit val system = ActorSystem()
-  implicit val materializer = ActorMaterializer()
+private[openligadb] abstract class HttpService extends LazyLogging {
+  implicit val defaultFormats: DefaultFormats.type = DefaultFormats
+  implicit val system: ActorSystem = ActorSystem()
+  implicit val materializer: ActorMaterializer = ActorMaterializer()
 
   protected def get(callUrl: String): String = {
     val request = HttpRequest(uri = callUrl, method = HttpMethods.GET)
@@ -84,7 +85,7 @@ private[openligadb] abstract class HttpService {
     if (cacheResult == null) {
       val responseFuture: Future[HttpResponse] = requestWithRedirect(request)
       val response = Await.result(responseFuture, 60.seconds)
-      val result = Await.result(Unmarshal(response.entity).to[String], 60.seconds)
+      val result = Await.result(Unmarshal(response.entity).to[String], 60.seconds).replaceAll(" xsi:nil=\"true\" />", " />")
       CacheHelper.webCallsCache.put(cacheKey, result)
       result
     } else {
@@ -99,7 +100,7 @@ private[openligadb] abstract class HttpService {
 
     Http().singleRequest(req).flatMap { resp =>
       resp.status match {
-        case StatusCodes.Found | StatusCodes.MovedPermanently | StatusCodes.SeeOther | StatusCodes.TemporaryRedirect | StatusCodes.PermanentRedirect => {
+        case StatusCodes.Found | StatusCodes.MovedPermanently | StatusCodes.SeeOther | StatusCodes.TemporaryRedirect | StatusCodes.PermanentRedirect =>
           resp.header[headers.Location].map { loc =>
             val locUri = loc.uri
             val newReq = req.copy(uri = locUri)
@@ -109,7 +110,6 @@ private[openligadb] abstract class HttpService {
               Http().singleRequest(newReq)
             }
           }.getOrElse(throw new RuntimeException(s"location not found on 302 for ${req.uri}"))
-        }
         case _ => Future(resp)
       }
     }

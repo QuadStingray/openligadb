@@ -137,6 +137,22 @@ class SeasonSpec extends org.specs2.mutable.Specification {
 
     }
 
+    "getAllGoals" >> {
+
+      val season = Season(848, League("bl1"), 2015, "Was auch immer fuer ein Name")
+
+      val allGoals = season.allGoals
+
+      allGoals.size must beEqualTo(869)
+
+      val fistGoalOfSeason = allGoals.head
+
+      fistGoalOfSeason.player.name must beEqualTo("Benatia, Medhi")
+
+
+
+    }
+
   }
 
 

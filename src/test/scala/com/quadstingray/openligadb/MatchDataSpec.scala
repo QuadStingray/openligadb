@@ -3,13 +3,13 @@ package com.quadstingray.openligadb
 import org.joda.time.DateTime
 
 
-class MatchSpec extends org.specs2.mutable.Specification {
+class MatchDataSpec extends org.specs2.mutable.Specification {
 
   "Match" >> {
 
     "apply with id 39738" >> {
 
-      val game = Match(39738)
+      val game = MatchData(39738)
 
       game.id must beEqualTo(39738)
 
@@ -21,15 +21,17 @@ class MatchSpec extends org.specs2.mutable.Specification {
 
       val goalForTest = game.goals.head
 
-      goalForTest.matchMinute must beEqualTo(11)
+      goalForTest.matchData must beEqualTo(game)
+
+      goalForTest.matchMinute.get must beEqualTo(11)
 
       goalForTest.id must beEqualTo(55579)
 
-      goalForTest.isOvertime must beFalse
+      goalForTest.isOvertime.get must beFalse
 
-      goalForTest.isOwnGoal must beFalse
+      goalForTest.isOwnGoal.get must beFalse
 
-      goalForTest.isPenalty must beFalse
+      goalForTest.isPenalty.get must beFalse
 
       goalForTest.scoreTeam1 must beEqualTo(1)
 
@@ -68,6 +70,8 @@ class MatchSpec extends org.specs2.mutable.Specification {
       game.matchResults.size must beEqualTo(2)
 
       val halfTimeResult = game.matchResults.head
+
+      halfTimeResult.matchData must beEqualTo(game)
 
       halfTimeResult.id must beEqualTo(70293)
 

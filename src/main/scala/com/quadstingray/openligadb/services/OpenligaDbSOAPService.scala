@@ -1,7 +1,9 @@
 package com.quadstingray.openligadb.services
 
-import com.quadstingray.openligadb.{League, Match, Season, Sport}
+import com.quadstingray.openligadb.services.OpenligaDbService.get
+import com.quadstingray.openligadb._
 import org.joda.time.DateTime
+import org.json4s.native.Serialization.read
 
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
@@ -45,25 +47,31 @@ private[openligadb] object OpenligaDbSOAPService extends HttpService with Openli
 
   def getAvailSeasonsBySportId(sportId: Long): List[Season] = getAllOpenligaDbLeaguesBySport(sportId)
 
-  def getLastMatchForLeague(shortName: String): Option[Match] = {
+  def getLastMatchForLeague(shortName: String): Option[MatchData] = {
     val xmlString = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <GetLastMatch xmlns=\"http://msiggi.de/Sportsdata/Webservices\">\n      <leagueShortcut>%s</leagueShortcut>\n    </GetLastMatch>\n  </soap:Body>\n</soap:Envelope>".format(shortName)
     val soapMatch = soap[OpenligaDbSoapMatchHelper](xmlString)
     OpenligaDbService.getMatchdataById(soapMatch.matchID.toLong)
   }
 
-  def getNextMatchForLeague(shortName: String): Option[Match] = {
+  def getGoalsForLeagueSeason(shortName: String, leagueId: Int): List[Goal] = {
+    val xmlString = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <GetGoalsByLeagueSaison xmlns=\"http://msiggi.de/Sportsdata/Webservices\">\n      <leagueShortcut>%s</leagueShortcut>\n      <leagueSaison>%s</leagueSaison>\n    </GetGoalsByLeagueSaison>\n  </soap:Body>\n</soap:Envelope>".format(shortName, leagueId)
+    val soapMatch = soap[List[OpenligaDbSoapGoal]](xmlString)
+    soapMatch
+  }
+
+  def getNextMatchForLeague(shortName: String): Option[MatchData] = {
     val xmlString = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <GetNextMatch xmlns=\"http://msiggi.de/Sportsdata/Webservices\">\n      <leagueShortcut>%s</leagueShortcut>\n    </GetNextMatch>\n  </soap:Body>\n</soap:Envelope>".format(shortName)
     val soapMatch = soap[OpenligaDbSoapMatchHelper](xmlString)
     OpenligaDbService.getMatchdataById(soapMatch.matchID.toLong)
   }
 
-  def getLastMatchForSeasonAndTeam(seasonId: Long, teamId: Long): Option[Match] = {
+  def getLastMatchForSeasonAndTeam(seasonId: Long, teamId: Long): Option[MatchData] = {
     val xmlString = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <GetNextMatchByLeagueTeam xmlns=\"http://msiggi.de/Sportsdata/Webservices\">\n      <leagueId>%s</leagueId>\n      <teamId>%s</teamId>\n    </GetNextMatchByLeagueTeam>\n  </soap:Body>\n</soap:Envelope>".format(seasonId, teamId)
     val soapMatch = soap[OpenligaDbSoapMatchHelper](xmlString)
     OpenligaDbService.getMatchdataById(soapMatch.matchID.toLong)
   }
 
-  def getNextMatchForSeasonAndTeam(seasonId: Long, teamId: Long): Option[Match] = {
+  def getNextMatchForSeasonAndTeam(seasonId: Long, teamId: Long): Option[MatchData] = {
     val xmlString = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <GetLastMatchByLeagueTeam xmlns=\"http://msiggi.de/Sportsdata/Webservices\">\n      <leagueId>%s</leagueId>\n      <teamId>%s</teamId>\n    </GetLastMatchByLeagueTeam>\n  </soap:Body>\n</soap:Envelope>".format(seasonId, teamId)
     val soapMatch = soap[OpenligaDbSoapMatchHelper](xmlString)
     OpenligaDbService.getMatchdataById(soapMatch.matchID.toLong)
@@ -75,10 +83,10 @@ private[openligadb] object OpenligaDbSOAPService extends HttpService with Openli
   }
 
   // Todo: rewrite for better performance without manual request all manuall
-  def getMatchesBetween(leagueShortcode: String, from: DateTime, to: DateTime): List[Match] = {
+  def getMatchesBetween(leagueShortcode: String, from: DateTime, to: DateTime): List[MatchData] = {
     val xmlString = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <GetMatchdataByLeagueDateTime xmlns=\"http://msiggi.de/Sportsdata/Webservices\">\n      <fromDateTime>%s</fromDateTime>\n      <toDateTime>%s</toDateTime>\n      <leagueShortcut>%s</leagueShortcut>\n    </GetMatchdataByLeagueDateTime>\n  </soap:Body>\n</soap:Envelope>".format(from, to, leagueShortcode)
     val soapHelperList = soap[List[OpenligaDbSoapMatchHelper]](xmlString)
-    val resultList: ArrayBuffer[Match] = ArrayBuffer()
+    val resultList: ArrayBuffer[MatchData] = ArrayBuffer()
     soapHelperList.foreach(soapMatch => resultList.+=(OpenligaDbService.getMatchdataById(soapMatch.matchID.toLong).get))
     resultList.toList
   }

@@ -6,7 +6,7 @@ class OpenligaServiceSpec extends org.specs2.mutable.Specification {
 
     "getAllAvailableLeagues" >> {
 
-      val league = OpenligaDb.getAvailableLeagues
+      val league = OpenligaDb.availableLeagues
 
       league.size must beGreaterThan(200)
 
@@ -16,7 +16,7 @@ class OpenligaServiceSpec extends org.specs2.mutable.Specification {
     }
 
     "getAllAvailableSeasons " >> {
-      val seasons = OpenligaDb.getAvailableSeasons
+      val seasons = OpenligaDb.availableSeasons
 
       seasons.size must beGreaterThan(200)
 
@@ -26,7 +26,7 @@ class OpenligaServiceSpec extends org.specs2.mutable.Specification {
     }
 
     "getAllAvailableSports " >> {
-      val sports = OpenligaDb.getAvailableSports
+      val sports = OpenligaDb.availableSports
 
       sports.size must beGreaterThan(10)
 

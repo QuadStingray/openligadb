@@ -18,7 +18,7 @@ class SportSpec extends org.specs2.mutable.Specification {
 
       sport.name must beEqualTo("Was auch immer")
 
-      val leagues = sport.getLeagues
+      val leagues = sport.leagues
 
       leagues.size must beGreaterThanOrEqualTo(241)
     }
@@ -29,7 +29,7 @@ class SportSpec extends org.specs2.mutable.Specification {
 
       sport.name must beEqualTo("Was auch immer")
 
-      val seasons = sport.getSeasons
+      val seasons = sport.seasons
 
       seasons.size must beGreaterThanOrEqualTo(311)
     }

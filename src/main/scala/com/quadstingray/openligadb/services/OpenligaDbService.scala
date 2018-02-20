@@ -5,7 +5,7 @@ import org.json4s.native.Serialization.read
 
 private[openligadb] object OpenligaDbService extends HttpService with OpenligaDbImplicits {
 
-  def getCurrentMatches(shortName: String): List[Match] = {
+  def getCurrentMatches(shortName: String): List[MatchData] = {
     read[List[OpenligaDbMatch]](get("https://www.openligadb.de/api/getmatchdata/%s".format(shortName)))
   }
 
@@ -15,7 +15,7 @@ private[openligadb] object OpenligaDbService extends HttpService with OpenligaDb
     (matchGroup, season)
   }
 
-  def getAllMatchesForLeagueSeason(shortName: String, year: Int): List[Match] = {
+  def getAllMatchesForLeagueSeason(shortName: String, year: Int): List[MatchData] = {
     read[List[OpenligaDbMatch]](get("https://www.openligadb.de/api/getmatchdata/%s/%s".format(shortName, year)))
   }
 
@@ -31,19 +31,19 @@ private[openligadb] object OpenligaDbService extends HttpService with OpenligaDb
     read[List[OpenligaDbGoalGetter]](get("https://www.openligadb.de/api/getgoalgetters/%s/%s".format(shortName, year)))
   }
 
-  def getMatchdataBySeasonAndGroup(shortName: String, year: Int, groupOrderId: Int): List[Match] = {
+  def getMatchdataBySeasonAndGroup(shortName: String, year: Int, groupOrderId: Int): List[MatchData] = {
     read[List[OpenligaDbMatch]](get("https://www.openligadb.de/api/getmatchdata/%s/%s/%s".format(shortName, year, groupOrderId)))
   }
 
-  def getMatchdataById(id: Long): Option[Match] = {
+  def getMatchdataById(id: Long): Option[MatchData] = {
     read[OpenligaDbMatch](get("https://www.openligadb.de/api/getmatchdata/%s".format(id)))
   }
 
-  def getMatchdataByTeams(team1Id: Long, team2Id: Long): List[Match] = {
+  def getMatchdataByTeams(team1Id: Long, team2Id: Long): List[MatchData] = {
     read[List[OpenligaDbMatch]](get("https://www.openligadb.de/api/getmatchdata/%s/%s".format(team1Id, team2Id)))
   }
 
-  def getLastChangeDate(team1Id: Long, team2Id: Long): List[Match] = {
+  def getLastChangeDate(team1Id: Long, team2Id: Long): List[MatchData] = {
     read[List[OpenligaDbMatch]](get("https://www.openligadb.de/api/getmatchdata/%s/%s".format(team1Id, team2Id)))
   }
 

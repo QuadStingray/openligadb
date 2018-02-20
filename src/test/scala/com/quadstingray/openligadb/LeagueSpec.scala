@@ -35,7 +35,7 @@ class LeagueSpec extends org.specs2.mutable.Specification {
 
       val league = League("bl1")
 
-      val season = league.getSeason(2015)
+      val season = league.season(2015)
 
       season.year must beEqualTo(2015)
 
@@ -124,7 +124,7 @@ class LeagueSpec extends org.specs2.mutable.Specification {
       val startDate: DateTime = new DateTime("2017-03-02T11:30Z")
       val endDate: DateTime = new DateTime("2017-04-04T11:30Z")
 
-      val openLigaMatch = league.getMatchesBetween(startDate, endDate)
+      val openLigaMatch = league.matchesBetween(startDate, endDate)
 
       openLigaMatch.size must beGreaterThanOrEqualTo(36)
     }

@@ -7,12 +7,12 @@ import scala.collection.mutable.ArrayBuffer
 
 private[openligadb] trait OpenligaDbImplicits {
 
-  implicit protected def convertOpenligaDbMatchToMatch(openligaDbMatch: OpenligaDbMatch): Option[Match] = {
+  implicit protected def convertOpenligaDbMatchToMatch(openligaDbMatch: OpenligaDbMatch): Option[MatchData] = {
     val listOfMatchResults: List[MatchResult] = openligaDbMatch.MatchResults
 
     val finalResult: Option[MatchResult] =
       if (listOfMatchResults.nonEmpty) {
-        Option(listOfMatchResults.sortWith((result1, result2) => result1.resultOrderID > result2.resultOrderID).head)
+        Option(listOfMatchResults.map(result => result.copy(matchId = openligaDbMatch.MatchID)).sortWith((result1, result2) => result1.resultOrderID > result2.resultOrderID).head)
       } else {
         None
       }
@@ -25,12 +25,15 @@ private[openligadb] trait OpenligaDbImplicits {
       None
     } else {
       val season = Season(openligaDbMatch.LeagueId)
-      Some(Match(openligaDbMatch.MatchID, openligaDbMatch.Team1, openligaDbMatch.Team2, openligaDbMatch.Goals, finalResult, listOfMatchResults, (openligaDbMatch.Group, season), openligaDbMatch.Location, openligaDbMatch.NumberOfViewers, openligaDbMatch.MatchIsFinished, matchDateTime, lastUpdateDateTime))
+      val goals : List[Goal] = openligaDbMatch.Goals
+
+      Some(MatchData(openligaDbMatch.MatchID, openligaDbMatch.Team1, openligaDbMatch.Team2, goals.map(goal => goal.copy(matchId = openligaDbMatch.MatchID)), finalResult, listOfMatchResults, (openligaDbMatch.Group, season), openligaDbMatch.Location,
+        openligaDbMatch.NumberOfViewers, openligaDbMatch.MatchIsFinished, matchDateTime, lastUpdateDateTime))
     }
   }
 
-  implicit protected def convertListOpenligaDbMatchToListMatch(openligaDbMatch: List[OpenligaDbMatch]): List[Match] = {
-    val buffer: ArrayBuffer[Match] = ArrayBuffer()
+  implicit protected def convertListOpenligaDbMatchToListMatch(openligaDbMatch: List[OpenligaDbMatch]): List[MatchData] = {
+    val buffer: ArrayBuffer[MatchData] = ArrayBuffer()
     openligaDbMatch.foreach(myMatch => myMatch.foreach(game => buffer += game))
     buffer.toList
   }
@@ -42,7 +45,8 @@ private[openligadb] trait OpenligaDbImplicits {
   }
 
   implicit protected def convertOpenligaDbMatchResultToMatchResult(openligaDbMatchResult: OpenligaDbMatchResult): MatchResult = {
-    MatchResult(openligaDbMatchResult.ResultID, openligaDbMatchResult.ResultName, openligaDbMatchResult.PointsTeam1, openligaDbMatchResult.PointsTeam2, openligaDbMatchResult.ResultOrderID, openligaDbMatchResult.ResultTypeID, openligaDbMatchResult.ResultDescription)
+    MatchResult(openligaDbMatchResult.ResultID, -1, openligaDbMatchResult.ResultName, openligaDbMatchResult.PointsTeam1, openligaDbMatchResult.PointsTeam2, openligaDbMatchResult.ResultOrderID, openligaDbMatchResult.ResultTypeID,
+      openligaDbMatchResult.ResultDescription)
   }
 
   implicit protected def convertOpenligaDbTeamToTeam(openligaDbTeam: OpenligaDbTeam): Team = {
@@ -65,15 +69,43 @@ private[openligadb] trait OpenligaDbImplicits {
   }
 
   implicit protected def convertOpenligaDbGoalToGoal(openligaDbGoal: OpenligaDbGoal): Goal = {
-    Goal(openligaDbGoal.GoalID, Player(openligaDbGoal.GoalGetterID, openligaDbGoal.GoalGetterName), openligaDbGoal.MatchMinute, openligaDbGoal.ScoreTeam1, openligaDbGoal.ScoreTeam2, openligaDbGoal.IsOvertime, openligaDbGoal.IsOwnGoal, openligaDbGoal.IsPenalty)
+    Goal(openligaDbGoal.GoalID, -1, Player(openligaDbGoal.GoalGetterID, openligaDbGoal.GoalGetterName), openligaDbGoal.ScoreTeam1, openligaDbGoal.ScoreTeam2, Option(openligaDbGoal.MatchMinute),
+      Option(openligaDbGoal.IsOvertime), Option(openligaDbGoal.IsOwnGoal), Option(openligaDbGoal.IsPenalty))
   }
-
 
   implicit protected def convertListOpenligaDbGoalToListGoal(openligaDbGoalList: List[OpenligaDbGoal]): List[Goal] = {
     val buffer: ArrayBuffer[Goal] = ArrayBuffer()
     openligaDbGoalList.foreach(openligaDbTeam => buffer += openligaDbTeam)
     buffer.toList
   }
+
+  implicit def stringToBoolenOption(string: String) : Option[Boolean] = {
+    if (string.equalsIgnoreCase("true"))
+      Some(true)
+    else if (string.equalsIgnoreCase("false"))
+      Some(false)
+    else
+      None
+  }
+
+  implicit protected def convertOpenligaDbSoapGoalToGoal(openligaDbGoal: OpenligaDbSoapGoal): Goal = {
+    val matchMinute : Option[Int] = {
+      if (openligaDbGoal.goalMatchMinute == "") {
+        None
+      } else {
+        Some(openligaDbGoal.goalMatchMinute.toInt)
+      }
+    }
+    Goal(openligaDbGoal.goalGetterID.toLong, openligaDbGoal.goalMachID.toLong, Player(openligaDbGoal.goalGetterID.toLong, openligaDbGoal.goalGetterName), openligaDbGoal.goalScoreTeam1.toInt, openligaDbGoal.goalScoreTeam2.toInt,matchMinute,
+      openligaDbGoal.goalOvertime, openligaDbGoal.goalOwnGoal, openligaDbGoal.goalPenalty)
+  }
+
+  implicit protected def convertListOpenligaDbSoapGoalToListGoal(openligaDbGoalList: List[OpenligaDbSoapGoal]): List[Goal] = {
+    val buffer: ArrayBuffer[Goal] = ArrayBuffer()
+    openligaDbGoalList.foreach(openligaDbTeam => buffer += openligaDbTeam)
+    buffer.toList
+  }
+
 
   implicit protected def convertOpenligaDbLeagueToLeague(openligaDbLeague: OpenligaDbSoapLeague): League = {
     League(openligaDbLeague.leagueShortcut)

@@ -6,7 +6,13 @@ version := "0.0.2-SNAPSHOT"
 
 scalaVersion := "2.12.4"
 
-licenses += ("Apache-2.0", url("https://www.apache.org/licenses/LICENSE-2.0.html"))
+homepage := Some(url("https://github.com/QuadStingray/sbt-javafx"))
+
+scmInfo := Some(ScmInfo(url("https://github.com/QuadStingray/sbt-javafx"), "https://github.com/QuadStingray/sbt-javafx.git"))
+
+developers := List(Developer("QuadStingray", "QuadStingray", "github@quadstingray.com", url("https://github.com/QuadStingray")))
+
+licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0"))
 
 // Tests
 libraryDependencies ++= Seq(
@@ -24,13 +30,17 @@ libraryDependencies += "org.cache2k" % "cache2k-api" % "1.0.1.Final"
 
 libraryDependencies += "org.cache2k" % "cache2k-core" % "1.0.1.Final"
 
+libraryDependencies += "com.typesafe.scala-logging" %% "scala-logging" % "3.7.2"
+
+libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.1.3"
+
 resolvers += Resolver.jcenterRepo
 
 publishTo := {
-  if (version.value.trim.endsWith("SNAPSHOT"))
+  if (isSnapshot.value)
     Some(Resolver.file("file", new File(Path.userHome.absolutePath + "/.m2/repository/")))
   else
-    Some("Bintray API Realm" at "https://api.bintray.com/content/quadstingray/maven/%s/%s/publish".format(name.value, version.value))
+    Some("Bintray API Realm" at "https://api.bintray.com/content/quadstingray/maven/%s/%s;publish=1;override=1".format(name.value, version.value))
 }
 
 

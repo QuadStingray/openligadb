@@ -10,11 +10,11 @@ case class Season(id: Long, league: League, year: Int, name: String) {
 
   def teams: List[Team] = OpenligaDbService.getAvailableTeams(league.shortName, year)
 
-  def allMatches: List[Match] = OpenligaDbService.getAllMatchesForLeagueSeason(league.shortName, year)
+  def allMatches: List[MatchData] = OpenligaDbService.getAllMatchesForLeagueSeason(league.shortName, year)
 
   def goalGetters: List[GoalGetter] = OpenligaDbService.getGoalGetters(league.shortName, year).sortWith((gg1, gg2) => gg1.goalCount > gg2.goalCount)
 
-  def allGoals: List[Goal] = ???
+  def allGoals: List[Goal] = OpenligaDbSOAPService.getGoalsForLeagueSeason(this.league.shortName, this.year)
 
   def currentMatchGroup: MatchGroup = ???
 

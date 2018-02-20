@@ -11,7 +11,7 @@ class TeamSpec extends org.specs2.mutable.Specification {
 
       val fcb = Team(40)
 
-      val nextMatch = fcb.getNextMatch(league.currentSeason)
+      val nextMatch = fcb.nextMatch(league.currentSeason)
 
       nextMatch.isDefined must beTrue
 
@@ -25,7 +25,7 @@ class TeamSpec extends org.specs2.mutable.Specification {
 
       val fcb = Team(40)
 
-      val nextMatch = fcb.getLastMatch(league.currentSeason)
+      val nextMatch = fcb.lastMatch(league.currentSeason)
 
       nextMatch.isDefined must beTrue
 
@@ -39,7 +39,7 @@ class TeamSpec extends org.specs2.mutable.Specification {
 
       val bvb = Team(7)
 
-      val matches = fcb.getLastMatchesVs(bvb)
+      val matches = fcb.lastMatchesVs(bvb)
 
       matches.size must beGreaterThan(50)
     }

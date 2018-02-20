@@ -1,6 +1,6 @@
 package com.quadstingray.openligadb
 
-class MatchGroupSpec extends org.specs2.mutable.Specification {
+class MatchDataGroupSpec extends org.specs2.mutable.Specification {
 
   "MatchGroup" >> {
 

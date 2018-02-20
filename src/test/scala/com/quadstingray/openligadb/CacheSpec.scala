@@ -13,7 +13,7 @@ class CacheSpec extends org.specs2.mutable.Specification {
 
       CacheHelper.webCallsCache.clear()
 
-      val game1 = Match(39738)
+      val game1 = MatchData(39738)
 
       game1.id must beEqualTo(39738)
 
@@ -21,7 +21,7 @@ class CacheSpec extends org.specs2.mutable.Specification {
 
       game1.isFinished must beTrue
 
-      val game2 = Match(39738)
+      val game2 = MatchData(39738)
 
       game2.id must beEqualTo(39738)
 
@@ -29,7 +29,7 @@ class CacheSpec extends org.specs2.mutable.Specification {
 
       game2.isFinished must beTrue
 
-      val game3 = Match(39736)
+      val game3 = MatchData(39736)
 
       game3.id must beEqualTo(39736)
 
