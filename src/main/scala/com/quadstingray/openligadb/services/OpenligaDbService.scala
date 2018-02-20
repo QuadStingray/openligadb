@@ -1,6 +1,7 @@
 package com.quadstingray.openligadb.services
 
 import com.quadstingray.openligadb._
+import com.quadstingray.openligadb.exceptions.NoMatchDataFoundException
 import org.json4s.native.Serialization.read
 
 private[openligadb] object OpenligaDbService extends HttpService with OpenligaDbImplicits {
@@ -36,14 +37,14 @@ private[openligadb] object OpenligaDbService extends HttpService with OpenligaDb
   }
 
   def getMatchdataById(id: Long): Option[MatchData] = {
-    read[OpenligaDbMatch](get("https://www.openligadb.de/api/getmatchdata/%s".format(id)))
+    val resultstring = get("https://www.openligadb.de/api/getmatchdata/%s".format(id))
+    if (resultstring.equalsIgnoreCase("[]"))
+      throw new NoMatchDataFoundException()
+
+    read[OpenligaDbMatch](resultstring)
   }
 
   def getMatchdataByTeams(team1Id: Long, team2Id: Long): List[MatchData] = {
-    read[List[OpenligaDbMatch]](get("https://www.openligadb.de/api/getmatchdata/%s/%s".format(team1Id, team2Id)))
-  }
-
-  def getLastChangeDate(team1Id: Long, team2Id: Long): List[MatchData] = {
     read[List[OpenligaDbMatch]](get("https://www.openligadb.de/api/getmatchdata/%s/%s".format(team1Id, team2Id)))
   }
 

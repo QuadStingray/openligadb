@@ -1,5 +1,7 @@
 package com.quadstingray.openligadb
 
+import com.quadstingray.openligadb.exceptions.NoSportFoundException
+
 class SportSpec extends org.specs2.mutable.Specification {
 
   "Sport" >> {
@@ -9,6 +11,21 @@ class SportSpec extends org.specs2.mutable.Specification {
       val sport = Sport(1)
 
       sport.name must beEqualTo("Fußball")
+
+    }
+
+    "apply with id 12345678912345678 NoSeasonFoundException" >> {
+
+      var errorCatched = false
+
+      try {
+        val season = Sport(12345678912345678L)
+      } catch {
+        case e: NoSportFoundException =>
+          errorCatched = true
+      }
+
+      errorCatched must beTrue
 
     }
 

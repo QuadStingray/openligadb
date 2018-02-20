@@ -16,7 +16,13 @@ case class Season(id: Long, league: League, year: Int, name: String) {
 
   def allGoals: List[Goal] = OpenligaDbSOAPService.getGoalsForLeagueSeason(this.league.shortName, this.year)
 
-  def currentMatchGroup: MatchGroup = ???
+  def currentMatchGroup: MatchGroup = {
+    if (league.currentMatchGroup.season == this) {
+      league.currentMatchGroup
+    } else {
+      matchGroups.last
+    }
+  }
 
   def lastChangeDate: DateTime = OpenligaDbSOAPService.getLastChangeDateForSeason(league.shortName, year)
 }

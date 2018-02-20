@@ -1,5 +1,6 @@
 package com.quadstingray.openligadb
 
+import com.quadstingray.openligadb.exceptions.NoMatchDataFoundException
 import org.joda.time.DateTime
 
 
@@ -108,6 +109,21 @@ class MatchDataSpec extends org.specs2.mutable.Specification {
       game.team2.iconUrl.contains(".png") must beTrue
 
       game.team2.name must beEqualTo("Bayern München")
+    }
+
+    "apply with id 12345678912345678 NoMatchDataFoundException" >> {
+
+      var errorCatched = false
+
+      try {
+        val season = MatchData(12345678912345678L)
+      } catch {
+        case e: NoMatchDataFoundException =>
+          errorCatched = true
+      }
+
+      errorCatched must beTrue
+
     }
 
   }

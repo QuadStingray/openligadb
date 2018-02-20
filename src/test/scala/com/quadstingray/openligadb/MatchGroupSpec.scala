@@ -1,8 +1,46 @@
 package com.quadstingray.openligadb
 
-class MatchDataGroupSpec extends org.specs2.mutable.Specification {
+import com.quadstingray.openligadb.exceptions.NoMatchGroupFoundException
+import org.joda.time.DateTime
+
+class MatchGroupSpec extends org.specs2.mutable.Specification {
 
   "MatchGroup" >> {
+
+
+    "apply with id 12345678912345678 NoMatchGroupFoundException" >> {
+
+      var errorCatched = false
+
+      try {
+        val season = Season(848, League("bl1"), 2015, "Was auch immer fuer ein Name")
+
+        val matchDay = MatchGroup(12345678912345678L, season)
+      } catch {
+        case e: NoMatchGroupFoundException =>
+          errorCatched = true
+      }
+
+      errorCatched must beTrue
+
+    }
+
+    "apply with matchgrouporderid 40 NoMatchGroupFoundException" >> {
+
+      var errorCatched = false
+
+      try {
+        val season = Season(848, League("bl1"), 2015, "Was auch immer fuer ein Name")
+
+        val matchDay = MatchGroup(season, 40)
+      } catch {
+        case e: NoMatchGroupFoundException =>
+          errorCatched = true
+      }
+
+      errorCatched must beTrue
+
+    }
 
     "apply with id 17757" >> {
 
@@ -15,6 +53,8 @@ class MatchDataGroupSpec extends org.specs2.mutable.Specification {
       matchDay.matchGroupOrderNumber must beEqualTo(8)
 
       matchDay.name must beEqualTo("8. Spieltag")
+
+      matchDay.lastChangeDate must beEqualTo(new DateTime("2015-10-04T19:22:40.440"))
 
     }
 

@@ -1,6 +1,6 @@
 package com.quadstingray.openligadb.exceptions
 
-class NoMatchFoundException(message: String = "No Games found Exception", cause: Throwable = null) extends Exception(message, cause)
+class NoMatchDataFoundException(message: String = "No Games found Exception", cause: Throwable = null) extends Exception(message, cause)
 
 class NoSeasonFoundException(message: String = "No Season found Exception", cause: Throwable = null) extends Exception(message, cause)
 

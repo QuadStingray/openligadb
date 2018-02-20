@@ -1,5 +1,8 @@
 package com.quadstingray.openligadb
 
+import com.quadstingray.openligadb.exceptions.NoSeasonFoundException
+import org.joda.time.DateTime
+
 class SeasonSpec extends org.specs2.mutable.Specification {
 
   "Season" >> {
@@ -16,6 +19,36 @@ class SeasonSpec extends org.specs2.mutable.Specification {
 
     }
 
+    "apply with id 12345678912345678 NoSeasonFoundException" >> {
+
+      var errorCatched = false
+
+      try {
+        val season = Season(12345678912345678L)
+      } catch {
+        case e: NoSeasonFoundException =>
+          errorCatched = true
+      }
+
+      errorCatched must beTrue
+
+    }
+
+    "apply with shortName bl1 and year 2015 NoSeasonFoundException" >> {
+
+      var errorCatched = false
+
+      try {
+        val season = Season("bl1", 2099)
+      } catch {
+        case e: NoSeasonFoundException =>
+          errorCatched = true
+      }
+
+      errorCatched must beTrue
+
+    }
+
     "apply with shortName bl1 and year 2015" >> {
 
       val season = Season("bl1", 2015)
@@ -25,6 +58,8 @@ class SeasonSpec extends org.specs2.mutable.Specification {
       season.name must beEqualTo("1. Fußball-Bundesliga 2015/2016")
 
       season.id must beEqualTo(848l)
+
+      season.lastChangeDate must beEqualTo(new DateTime("2016-05-18T16:22:40.253"))
 
     }
 
@@ -50,6 +85,28 @@ class SeasonSpec extends org.specs2.mutable.Specification {
 
       matchDay1.matchGroupOrderNumber must beEqualTo(1)
 
+    }
+
+    "old season get current matchgroup" >> {
+
+      val season = Season(848, League("bl1"), 2015, "Was auch immer fuer ein Name")
+
+      val matchGroup = season.currentMatchGroup
+
+      matchGroup.season must beEqualTo(season)
+
+      matchGroup.matchGroupOrderNumber must beEqualTo(34)
+    }
+
+    "current bl season get current matchgroup" >> {
+
+      val league = League("bl1")
+
+      val matchGroup = league.currentSeason.currentMatchGroup
+
+      matchGroup.matchGroupOrderNumber must beLessThan(34)
+
+      matchGroup must beEqualTo(league.currentMatchGroup)
     }
 
     "getAllMatches" >> {
