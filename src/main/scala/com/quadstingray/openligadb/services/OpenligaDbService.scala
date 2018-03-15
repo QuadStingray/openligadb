@@ -4,6 +4,8 @@ import com.quadstingray.openligadb._
 import com.quadstingray.openligadb.exceptions.NoMatchDataFoundException
 import org.json4s.native.Serialization.read
 
+import scala.collection.mutable.ArrayBuffer
+
 private[openligadb] object OpenligaDbService extends HttpService with OpenligaDbImplicits {
 
   def getCurrentMatches(shortName: String): List[MatchData] = {
@@ -34,6 +36,17 @@ private[openligadb] object OpenligaDbService extends HttpService with OpenligaDb
 
   def getMatchdataBySeasonAndGroup(shortName: String, year: Int, groupOrderId: Int): List[MatchData] = {
     read[List[OpenligaDbMatch]](get("https://www.openligadb.de/api/getmatchdata/%s/%s/%s".format(shortName, year, groupOrderId)))
+  }
+
+  def getTableBySeason(shortName: String, year: Int): List[TableElement] = {
+    val tableSeason = read[List[OpenligaDbTableItem]](get("https://www.openligadb.de/api/getbltable/%s/%s".format(shortName, year)))
+    val result: ArrayBuffer[TableElement] = ArrayBuffer()
+    var i = 1
+    tableSeason.foreach(element => {
+      result += TableElement(i, Team(element.TeamInfoId, element.TeamName, element.ShortName, element.TeamIconUrl), element.Points, element.Matches, element.Won, element.Draw, element.Lost, element.Goals, element.OpponentGoals)
+      i += 1
+    })
+    result.toList
   }
 
   def getMatchdataById(id: Long): Option[MatchData] = {

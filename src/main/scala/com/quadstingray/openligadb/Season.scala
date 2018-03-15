@@ -24,6 +24,8 @@ case class Season(id: Long, league: League, year: Int, name: String) {
     }
   }
 
+  def currentTable: List[TableElement] = OpenligaDbService.getTableBySeason(league.shortName, year)
+
   def lastChangeDate: DateTime = OpenligaDbSOAPService.getLastChangeDateForSeason(league.shortName, year)
 }
 

@@ -210,6 +210,59 @@ class SeasonSpec extends org.specs2.mutable.Specification {
 
     }
 
+    "get current table" >> {
+
+      val season = Season(848, League("bl1"), 2015, "Was auch immer fuer ein Name")
+
+      val table: List[TableElement] = season.currentTable
+
+      table.size must beEqualTo(18)
+
+      val seasonWinner = table.head
+
+      val winningTeamId = seasonWinner.team.id
+
+      //      Team(winningTeamId) must beEqualTo(seasonWinner.team)
+
+      seasonWinner.team.name must beEqualTo("Bayern München")
+
+      seasonWinner.countMatches must beEqualTo(34)
+
+      seasonWinner.win must beEqualTo(28)
+
+      seasonWinner.draw must beEqualTo(4)
+
+      seasonWinner.defeat must beEqualTo(2)
+
+      seasonWinner.goals must beEqualTo(80)
+
+      seasonWinner.opponentGoals must beEqualTo(17)
+
+      seasonWinner.goalDiff must beEqualTo(63)
+
+      seasonWinner.points must beEqualTo(88)
+
+      val seasonLast = table.last
+
+      seasonLast.team.name must beEqualTo("Hannover 96")
+
+      seasonLast.countMatches must beEqualTo(34)
+
+      seasonLast.win must beEqualTo(7)
+
+      seasonLast.draw must beEqualTo(4)
+
+      seasonLast.defeat must beEqualTo(23)
+
+      seasonLast.goals must beEqualTo(31)
+
+      seasonLast.opponentGoals must beEqualTo(62)
+
+      seasonLast.goalDiff must beEqualTo(-31)
+
+      seasonLast.points must beEqualTo(25)
+
+    }
   }
 
 

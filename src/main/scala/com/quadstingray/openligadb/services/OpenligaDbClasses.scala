@@ -13,3 +13,5 @@ private case class OpenligaDbLocation(LocationID: Long, LocationStadium: String,
 private case class OpenligaDbGoal(GoalID: Long, ScoreTeam1: Int, ScoreTeam2: Int, MatchMinute: Int = -1, GoalGetterID: Long, GoalGetterName: String, IsPenalty: Boolean, IsOwnGoal: Boolean, IsOvertime: Boolean, Comment: String)
 
 private case class OpenligaDbGoalGetter(GoalCount: Int, GoalGetterId: Long, GoalGetterName: String, GoalGetterNationality: Option[String])
+
+private case class OpenligaDbTableItem(TeamInfoId: Int, TeamName: String, ShortName: String, TeamIconUrl: String, Points: Int, OpponentGoals: Int, Goals: Int, Matches: Int, Won: Int, Lost: Int, Draw: Int, GoalDiff: Int)
