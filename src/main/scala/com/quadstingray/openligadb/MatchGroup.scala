@@ -1,14 +1,13 @@
 package com.quadstingray.openligadb
 
 import com.quadstingray.openligadb.exceptions.NoMatchGroupFoundException
-import com.quadstingray.openligadb.services.{OpenligaDbSOAPService, OpenligaDbService}
 import org.joda.time.DateTime
 
-case class MatchGroup(id: Long, season: Season, name: String, matchGroupOrderNumber: Int) {
+case class MatchGroup(id: Long, season: Season, name: String, matchGroupOrderNumber: Int) extends OpenligaDbTrait {
 
-  def matches: List[MatchData] = OpenligaDbService.getMatchdataBySeasonAndGroup(season.league.shortName, season.year, matchGroupOrderNumber)
+  def matches: List[MatchData] = openligaDbService.getMatchdataBySeasonAndGroup(season.league.shortName, season.year, matchGroupOrderNumber)
 
-  def lastChangeDate: DateTime = OpenligaDbSOAPService.getLastChangeDateForMatchGroup(season.league.shortName, season.year, matchGroupOrderNumber)
+  def lastChangeDate: DateTime = openligaDbSOAPService.getLastChangeDateForMatchGroup(season.league.shortName, season.year, matchGroupOrderNumber)
 
 }
 

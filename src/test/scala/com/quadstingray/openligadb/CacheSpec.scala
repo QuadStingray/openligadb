@@ -1,17 +1,20 @@
 package com.quadstingray.openligadb
 
-import com.quadstingray.openligadb.services.CacheHelper
-import org.cache2k.core.HeapCache
+import com.quadstingray.openligadb.services.GuiceModule
+import com.quadstingray.openligadb.services.cache.CacheService
 import org.joda.time.DateTime
 
 
 class CacheSpec extends org.specs2.mutable.Specification {
 
+
+  val cache: CacheService = GuiceModule.injector.getInstance(classOf[CacheService])
+
   "CacheSpec" >> {
 
     "check that cache is used" >> {
 
-      CacheHelper.webCallsCache.clear()
+      cache.clearCaches()
 
       val game1 = MatchData(39738)
 
@@ -35,11 +38,11 @@ class CacheSpec extends org.specs2.mutable.Specification {
 
       game3.isFinished must beTrue
 
-      val cacheInfo = CacheHelper.webCallsCache.asInstanceOf[HeapCache[String, String]].getInfo()
+      cache.putCount must beGreaterThanOrEqualTo(2l)
 
-      cacheInfo.getGetCount must beGreaterThan(cacheInfo.getPutCount)
+      cache.getCount must beGreaterThan(cache.putCount)
 
-      cacheInfo.getPutCount must between(cacheInfo.getMissCount - 5, cacheInfo.getMissCount + 5)
+      cache.putCount must between(cache.missCount - 5, cache.missCount + 5)
 
     }
 

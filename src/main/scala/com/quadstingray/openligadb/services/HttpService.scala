@@ -1,10 +1,13 @@
 package com.quadstingray.openligadb.services
 
+import javax.inject.Inject
+
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.unmarshalling.Unmarshal
 import akka.stream.{ActorMaterializer, Materializer}
+import com.quadstingray.openligadb.services.cache.CacheService
 import com.typesafe.scalalogging.LazyLogging
 import org.json4s.DefaultFormats
 import org.json4s.Xml.toJson
@@ -16,12 +19,18 @@ import scala.concurrent.{Await, Future}
 import scala.xml.factory.XMLLoader
 import scala.xml.{Elem, Node, SAXParser}
 
-private[openligadb] abstract class HttpService extends LazyLogging {
+trait HttpService {
+  private[openligadb] def soap[T](body: String)(implicit m: Manifest[T]): T
+
+  private[openligadb] def get(callUrl: String): String
+}
+
+private[openligadb] class AkkaHttpService @Inject()(cache: CacheService) extends LazyLogging with HttpService {
   implicit val defaultFormats: DefaultFormats.type = DefaultFormats
   implicit val system: ActorSystem = ActorSystem()
   implicit val materializer: ActorMaterializer = ActorMaterializer()
 
-  protected def get(callUrl: String): String = {
+  private[openligadb] def get(callUrl: String): String = {
     val request = HttpRequest(uri = callUrl, method = HttpMethods.GET)
     getFromCacheOrExecuteRequest(request)
   }
@@ -40,7 +49,7 @@ private[openligadb] abstract class HttpService extends LazyLogging {
     }
   }
 
-  protected def soap[T](body: String)(implicit m: Manifest[T]): T = {
+  private[openligadb] def soap[T](body: String)(implicit m: Manifest[T]): T = {
 
     object SecureXmlParser extends XMLLoader[Elem] {
 
@@ -80,13 +89,13 @@ private[openligadb] abstract class HttpService extends LazyLogging {
 
   private def getFromCacheOrExecuteRequest(request: HttpRequest): String = {
     val cachingString = "%s - %s - %s".format(request.method.value, request.uri, request.entity)
-    val cacheKey = CacheHelper.md5(cachingString)
-    val cacheResult = CacheHelper.webCallsCache.get(cacheKey)
+    val cacheKey = cache.generateKey(cachingString)
+    val cacheResult = cache.getCachedElement(cacheKey)
     if (cacheResult == null) {
       val responseFuture: Future[HttpResponse] = requestWithRedirect(request)
       val response = Await.result(responseFuture, 60.seconds)
       val result = Await.result(Unmarshal(response.entity).to[String], 60.seconds).replaceAll(" xsi:nil=\"true\" />", " />")
-      CacheHelper.webCallsCache.put(cacheKey, result)
+      cache.putElement(cacheKey, result)
       result
     } else {
       cacheResult
@@ -113,6 +122,15 @@ private[openligadb] abstract class HttpService extends LazyLogging {
         case _ => Future(resp)
       }
     }
+  }
+
+  def stop(): Unit = {
+    system.terminate()
+    Await.result(system.terminate(), Duration.Inf)
+  }
+
+  sys.ShutdownHookThread {
+    stop()
   }
 
 }

@@ -15,23 +15,33 @@ licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0"))
 
 // Tests
 libraryDependencies ++= Seq(
-  "org.specs2" %% "specs2-core" % "4.0.1" % "test",
+  "org.specs2" %% "specs2-core" % "4.0.3" % "test",
   "junit" % "junit" % "4.12" % "test"
 )
 
+// akka
 libraryDependencies ++= Seq(
-  "com.typesafe.akka" %% "akka-http" % "10.0.10",
+  "com.typesafe.akka" %% "akka-http" % "10.1.0",
+  "com.typesafe.akka" %% "akka-stream" % "2.5.11"
+)
+
+libraryDependencies ++= Seq(
   "org.json4s" %% "json4s-native" % "3.5.3",
+  "com.google.inject" % "guice" % "4.2.0",
   "joda-time" % "joda-time" % "2.9.9"
 )
 
-libraryDependencies += "org.cache2k" % "cache2k-api" % "1.0.1.Final"
+// Caching
+libraryDependencies ++= Seq(
+  "org.cache2k" % "cache2k-api" % "1.0.2.Final",
+  "org.cache2k" % "cache2k-core" % "1.0.2.Final"
+)
 
-libraryDependencies += "org.cache2k" % "cache2k-core" % "1.0.1.Final"
-
-libraryDependencies += "com.typesafe.scala-logging" %% "scala-logging" % "3.7.2"
-
-libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.1.3"
+// Logging
+libraryDependencies ++= Seq(
+  "com.typesafe.scala-logging" %% "scala-logging" % "3.8.0",
+  "ch.qos.logback" % "logback-classic" % "1.2.3"
+)
 
 resolvers += Resolver.jcenterRepo
 

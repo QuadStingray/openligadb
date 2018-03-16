@@ -1,13 +1,12 @@
 package com.quadstingray.openligadb
 
 import com.quadstingray.openligadb.exceptions.NoSportFoundException
-import com.quadstingray.openligadb.services.OpenligaDbSOAPService
 
-case class Sport(id: Long, name: String) {
+case class Sport(id: Long, name: String) extends OpenligaDbTrait {
 
-  def leagues: List[League] = OpenligaDbSOAPService.getAvailLeaguesBySportId(id)
+  def leagues: List[League] = openligaDbSOAPService.getAvailLeaguesBySportId(id)
 
-  def seasons: List[Season] = OpenligaDbSOAPService.getAvailSeasonsBySportId(id)
+  def seasons: List[Season] = openligaDbSOAPService.getAvailSeasonsBySportId(id)
 
 }
 
