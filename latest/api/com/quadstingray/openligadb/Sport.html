@@ -133,6 +133,22 @@
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="index.html" class="extype" name="com.quadstingray.openligadb">openligadb</a></dd></dl></div>
+    </li><li name="com.quadstingray.openligadb.services" visbl="pub" class="indented4 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="services"></a><a id="services:services"></a>
+      <span class="permalink">
+      <a href="../../../com/quadstingray/openligadb/index.html#services" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="services/index.html"><span class="name">services</span></a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="index.html" class="extype" name="com.quadstingray.openligadb">openligadb</a></dd></dl></div>
     </li><li class="current-entities indented3">
                         <span class="separator"></span>
                         <a class="class" href="Goal.html" title=""></a>
@@ -167,6 +183,10 @@
                         <a href="OpenligaDb$.html" title="">OpenligaDb</a>
                       </li><li class="current-entities indented3">
                         <span class="separator"></span>
+                        <a class="trait" href="OpenligaDbTrait.html" title=""></a>
+                        <a href="OpenligaDbTrait.html" title="">OpenligaDbTrait</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
                         <a class="class" href="Player.html" title=""></a>
                         <a href="Player.html" title="">Player</a>
                       </li><li class="current-entities indented3">
@@ -177,6 +197,10 @@
                         <a class="object" href="Sport$.html" title=""></a>
                         <a class="class" href="" title=""></a>
                         <a href="" title="">Sport</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="TableElement.html" title=""></a>
+                        <a href="TableElement.html" title="">TableElement</a>
                       </li><li class="current-entities indented3">
                         <a class="object" href="Team$.html" title=""></a>
                         <a class="class" href="Team.html" title=""></a>
@@ -206,7 +230,7 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">Sport</span><span class="params">(<span name="id">id: <span class="extype" name="scala.Long">Long</span></span>, <span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <span class="name">Sport</span><span class="params">(<span name="id">id: <span class="extype" name="scala.Long">Long</span></span>, <span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="OpenligaDbTrait.html" class="extype" name="com.quadstingray.openligadb.OpenligaDbTrait">OpenligaDbTrait</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
 
@@ -215,7 +239,7 @@
           <span class="toggle">
             Linear Supertypes
           </span>
-          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <a href="OpenligaDbTrait.html" class="extype" name="com.quadstingray.openligadb.OpenligaDbTrait">OpenligaDbTrait</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -241,7 +265,7 @@
                   <span class="filtertype">Inherited<br />
                   </span>
                   <ol id="linearization">
-                    <li class="in" name="com.quadstingray.openligadb.Sport"><span>Sport</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                    <li class="in" name="com.quadstingray.openligadb.Sport"><span>Sport</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="com.quadstingray.openligadb.OpenligaDbTrait"><span>OpenligaDbTrait</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                   </ol>
                 </div><div class="ancestors">
               <span class="filtertype"></span>
@@ -550,6 +574,38 @@
                 <span class="name">@native</span><span class="args">()</span>
               
         </dd></dl></div>
+    </li><li name="com.quadstingray.openligadb.OpenligaDbTrait#openligaDbSOAPService" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="openligaDbSOAPService:com.quadstingray.openligadb.services.OpenligaDbSOAPService"></a><a id="openligaDbSOAPService:OpenligaDbSOAPService"></a>
+      <span class="permalink">
+      <a href="../../../com/quadstingray/openligadb/Sport.html#openligaDbSOAPService:com.quadstingray.openligadb.services.OpenligaDbSOAPService" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">openligaDbSOAPService</span><span class="result">: <a href="services/OpenligaDbSOAPService.html" class="extype" name="com.quadstingray.openligadb.services.OpenligaDbSOAPService">OpenligaDbSOAPService</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="OpenligaDbTrait.html" class="extype" name="com.quadstingray.openligadb.OpenligaDbTrait">OpenligaDbTrait</a></dd></dl></div>
+    </li><li name="com.quadstingray.openligadb.OpenligaDbTrait#openligaDbService" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="openligaDbService:com.quadstingray.openligadb.services.OpenligaDbService"></a><a id="openligaDbService:OpenligaDbService"></a>
+      <span class="permalink">
+      <a href="../../../com/quadstingray/openligadb/Sport.html#openligaDbService:com.quadstingray.openligadb.services.OpenligaDbService" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">openligaDbService</span><span class="result">: <a href="services/OpenligaDbService.html" class="extype" name="com.quadstingray.openligadb.services.OpenligaDbService">OpenligaDbService</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="OpenligaDbTrait.html" class="extype" name="com.quadstingray.openligadb.OpenligaDbTrait">OpenligaDbTrait</a></dd></dl></div>
     </li><li name="com.quadstingray.openligadb.Sport#seasons" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="seasons:List[com.quadstingray.openligadb.Season]"></a><a id="seasons:List[Season]"></a>
       <span class="permalink">
@@ -668,6 +724,8 @@
               <h3>Inherited from <span class="extype" name="scala.Product">Product</span></h3>
             </div><div class="parent" name="scala.Equals">
               <h3>Inherited from <span class="extype" name="scala.Equals">Equals</span></h3>
+            </div><div class="parent" name="com.quadstingray.openligadb.OpenligaDbTrait">
+              <h3>Inherited from <a href="OpenligaDbTrait.html" class="extype" name="com.quadstingray.openligadb.OpenligaDbTrait">OpenligaDbTrait</a></h3>
             </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
