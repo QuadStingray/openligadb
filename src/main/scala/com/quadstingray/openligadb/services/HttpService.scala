@@ -27,7 +27,7 @@ trait HttpService {
 
 private[openligadb] class AkkaHttpService @Inject()(cache: CacheService) extends LazyLogging with HttpService {
   implicit val defaultFormats: DefaultFormats.type = DefaultFormats
-  implicit val system: ActorSystem = ActorSystem()
+  implicit val system: ActorSystem = ActorSystem(java.util.UUID.randomUUID.toString)
   implicit val materializer: ActorMaterializer = ActorMaterializer()
 
   private[openligadb] def get(callUrl: String): String = {
@@ -126,6 +126,11 @@ private[openligadb] class AkkaHttpService @Inject()(cache: CacheService) extends
 
   def stop(): Unit = {
     system.terminate()
+    materializer.shutdown()
+    Http().shutdownAllConnectionPools().flatMap { _ =>
+      materializer.shutdown()
+      system.terminate()
+    }
     Await.result(system.terminate(), Duration.Inf)
   }
 
