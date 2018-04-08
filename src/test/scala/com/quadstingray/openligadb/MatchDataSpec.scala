@@ -102,13 +102,15 @@ class MatchDataSpec extends org.specs2.mutable.Specification {
 
       game.team2.id must beEqualTo(40)
 
-      game.team2.shortname must beEqualTo("FC Bayern")
+      game.team2.name must beEqualTo("FC Bayern")
 
-      game.team2.iconUrl.contains("Logo_FC_Bayern_M") must beTrue
+      game.team2.shortname must beEqualTo("FCB")
+
+      game.team2.iconUrl.contains("FC_Bayern_M") must beTrue
+
+      game.team2.iconUrl.contains("Logo") must beTrue
 
       game.team2.iconUrl.contains(".png") must beTrue
-
-      game.team2.name must beEqualTo("Bayern München")
     }
 
     "apply with id 12345678912345678 NoMatchDataFoundException" >> {

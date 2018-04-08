@@ -71,7 +71,7 @@ class LeagueSpec extends org.specs2.mutable.Specification {
 
     "lastMatch " >> {
 
-      val league = League("bl1")
+      val league = League("cl15")
 
       val openLigaMatch = league.lastMatch.get
 
@@ -81,9 +81,9 @@ class LeagueSpec extends org.specs2.mutable.Specification {
 
       openLigaMatch.finalResult.get.name must beEqualTo("Endergebnis")
 
-      openLigaMatch.finalResult.get.scoreTeam1 must beGreaterThanOrEqualTo(0)
+      openLigaMatch.finalResult.get.scoreTeam1 must beGreaterThanOrEqualTo(2)
 
-      openLigaMatch.finalResult.get.scoreTeam2 must beGreaterThanOrEqualTo(0)
+      openLigaMatch.finalResult.get.scoreTeam2 must beGreaterThanOrEqualTo(1)
 
     }
 

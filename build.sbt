@@ -3,7 +3,7 @@ name := "openligadb"
 
 organization := "com.quadstingray"
 
-scalaVersion := "2.12.4"
+scalaVersion := "2.12.5"
 
 homepage := Some(url("https://github.com/QuadStingray/sbt-javafx"))
 
@@ -21,7 +21,7 @@ libraryDependencies ++= Seq(
 
 // akka
 libraryDependencies ++= Seq(
-  "com.typesafe.akka" %% "akka-http" % "10.1.0",
+  "com.typesafe.akka" %% "akka-http" % "10.1.1",
   "com.typesafe.akka" %% "akka-stream" % "2.5.11"
 )
 

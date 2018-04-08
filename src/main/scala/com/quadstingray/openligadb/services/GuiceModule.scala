@@ -9,8 +9,6 @@ private[openligadb] class GuiceModule extends AbstractModule {
     bind(classOf[CacheService]).to(classOf[Cache2kCacheImplementation]).asEagerSingleton()
     bind(classOf[OpenligaDbService]).to(classOf[OpenligaDbServiceImpementation])
     bind(classOf[OpenligaDbSOAPService]).to(classOf[OpenligaDbSOAPServiceImplementation])
-
-
   }
 }
 

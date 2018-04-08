@@ -127,7 +127,7 @@ class SeasonSpec extends org.specs2.mutable.Specification {
 
       match1.id must beEqualTo(33236)
 
-      match1.team1.shortname must beEqualTo("FC Bayern")
+      match1.team1.shortname must beEqualTo("FCB")
 
       match1.team2.shortname must beEqualTo("HSV")
 
@@ -158,11 +158,13 @@ class SeasonSpec extends org.specs2.mutable.Specification {
 
       fcb.id must beEqualTo(40)
 
-      fcb.name must beEqualTo("Bayern München")
+      fcb.name must beEqualTo("FC Bayern")
 
-      fcb.shortname must beEqualTo("FC Bayern")
+      fcb.shortname must beEqualTo("FCB")
 
-      fcb.iconUrl.contains("Logo_FC_Bayern_M") must beTrue
+      fcb.iconUrl.contains("FC_Bayern_M") must beTrue
+
+      fcb.iconUrl.contains("Logo") must beTrue
 
       fcb.iconUrl.contains(".png") must beTrue
 
@@ -224,7 +226,7 @@ class SeasonSpec extends org.specs2.mutable.Specification {
 
       //      Team(winningTeamId) must beEqualTo(seasonWinner.team)
 
-      seasonWinner.team.name must beEqualTo("Bayern München")
+      seasonWinner.team.name must beEqualTo("FC Bayern")
 
       seasonWinner.countMatches must beEqualTo(34)
 
