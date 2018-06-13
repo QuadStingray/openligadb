@@ -1,7 +1,5 @@
 package com.quadstingray.openligadb.services
 
-import javax.inject.Inject
-
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.model._
@@ -9,6 +7,7 @@ import akka.http.scaladsl.unmarshalling.Unmarshal
 import akka.stream.{ActorMaterializer, Materializer}
 import com.quadstingray.openligadb.services.cache.CacheService
 import com.typesafe.scalalogging.LazyLogging
+import javax.inject.Inject
 import org.json4s.DefaultFormats
 import org.json4s.Xml.toJson
 import org.json4s.native.Serialization._
@@ -90,15 +89,15 @@ private[openligadb] class AkkaHttpService @Inject()(cache: CacheService) extends
   private def getFromCacheOrExecuteRequest(request: HttpRequest): String = {
     val cachingString = "%s - %s - %s".format(request.method.value, request.uri, request.entity)
     val cacheKey = cache.generateKey(cachingString)
-    val cacheResult = cache.getCachedElement(cacheKey)
-    if (cacheResult == null) {
+    val cacheResult = cache.webCallsCache.getIfPresent(cacheKey)
+    if (cacheResult.isEmpty) {
       val responseFuture: Future[HttpResponse] = requestWithRedirect(request)
       val response = Await.result(responseFuture, 60.seconds)
       val result = Await.result(Unmarshal(response.entity).to[String], 60.seconds).replaceAll(" xsi:nil=\"true\" />", " />")
-      cache.putElement(cacheKey, result)
+      cache.webCallsCache.put(cacheKey, result)
       result
     } else {
-      cacheResult
+      cacheResult.get
     }
 
   }

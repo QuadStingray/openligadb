@@ -14,7 +14,11 @@ class CacheSpec extends org.specs2.mutable.Specification {
 
     "check that cache is used" >> {
 
-      cache.clearCaches()
+      val startHitCount = cache.webCallsCache.stats().hitCount()
+
+      val startMissCount = cache.webCallsCache.stats().missCount()
+
+      cache.webCallsCache.invalidateAll()
 
       val game1 = MatchData(39738)
 
@@ -38,11 +42,9 @@ class CacheSpec extends org.specs2.mutable.Specification {
 
       game3.isFinished must beTrue
 
-      cache.putCount must beGreaterThanOrEqualTo(2l)
+      cache.webCallsCache.stats().missCount() must beGreaterThan(1l)
 
-      cache.getCount must beGreaterThan(cache.putCount)
-
-      cache.putCount must between(cache.missCount - 5, cache.missCount + 5)
+      cache.webCallsCache.stats().hitCount() must beGreaterThan(1l)
 
     }
 

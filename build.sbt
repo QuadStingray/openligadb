@@ -32,10 +32,7 @@ libraryDependencies ++= Seq(
 )
 
 // Caching
-libraryDependencies ++= Seq(
-  "org.cache2k" % "cache2k-api" % "1.0.2.Final",
-  "org.cache2k" % "cache2k-core" % "1.0.2.Final"
-)
+libraryDependencies += "com.github.blemale" %% "scaffeine" % "2.5.0"
 
 // Logging
 libraryDependencies ++= Seq(
