@@ -27,9 +27,14 @@ class TeamSpec extends org.specs2.mutable.Specification {
 
       val nextMatch = fcb.lastMatch(league.currentSeason)
 
-      nextMatch.isDefined must beTrue
+      if (nextMatch.isDefined) {
+        nextMatch.isDefined must beTrue
 
-      nextMatch.get.id must beGreaterThanOrEqualTo(3000l)
+        nextMatch.get.id must beGreaterThanOrEqualTo(3000l)
+
+      } else {
+        league.currentMatchGroup.matchGroupOrderNumber must beEqualTo(34)
+      }
 
     }
 

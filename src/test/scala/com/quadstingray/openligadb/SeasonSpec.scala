@@ -104,7 +104,7 @@ class SeasonSpec extends org.specs2.mutable.Specification {
 
       val matchGroup = league.currentSeason.currentMatchGroup
 
-      matchGroup.matchGroupOrderNumber must beLessThan(34)
+      matchGroup.matchGroupOrderNumber must between(1, 34)
 
       matchGroup must beEqualTo(league.currentMatchGroup)
     }

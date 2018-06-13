@@ -3,7 +3,7 @@ name := "openligadb"
 
 organization := "com.quadstingray"
 
-scalaVersion := "2.12.5"
+scalaVersion := "2.12.6"
 
 homepage := Some(url("https://github.com/QuadStingray/sbt-javafx"))
 
@@ -15,20 +15,20 @@ licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0"))
 
 // Tests
 libraryDependencies ++= Seq(
-  "org.specs2" %% "specs2-core" % "4.0.3" % "test",
+  "org.specs2" %% "specs2-core" % "4.2.0" % "test",
   "junit" % "junit" % "4.12" % "test"
 )
 
 // akka
 libraryDependencies ++= Seq(
-  "com.typesafe.akka" %% "akka-http" % "10.1.1",
-  "com.typesafe.akka" %% "akka-stream" % "2.5.11"
+  "com.typesafe.akka" %% "akka-http" % "10.1.2",
+  "com.typesafe.akka" %% "akka-stream" % "2.5.13"
 )
 
 libraryDependencies ++= Seq(
-  "org.json4s" %% "json4s-native" % "3.5.3",
+  "org.json4s" %% "json4s-native" % "3.5.4",
   "com.google.inject" % "guice" % "4.2.0",
-  "joda-time" % "joda-time" % "2.9.9"
+  "joda-time" % "joda-time" % "2.10"
 )
 
 // Caching
@@ -39,7 +39,7 @@ libraryDependencies ++= Seq(
 
 // Logging
 libraryDependencies ++= Seq(
-  "com.typesafe.scala-logging" %% "scala-logging" % "3.8.0",
+  "com.typesafe.scala-logging" %% "scala-logging" % "3.9.0",
   "ch.qos.logback" % "logback-classic" % "1.2.3"
 )
 

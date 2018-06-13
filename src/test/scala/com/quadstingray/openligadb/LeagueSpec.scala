@@ -91,9 +91,14 @@ class LeagueSpec extends org.specs2.mutable.Specification {
 
       val league = League("bl1")
 
-      val openLigaMatch = league.nextMatch.get
+      val openLigaMatchOption = league.nextMatch
 
-      openLigaMatch.id must beGreaterThanOrEqualTo(28957l)
+      if (openLigaMatchOption.isDefined) {
+        val openLigaMatch = openLigaMatchOption.get
+        openLigaMatch.id must beGreaterThanOrEqualTo(28957l)
+      } else {
+        league.currentMatchGroup.matchGroupOrderNumber must beEqualTo(34)
+      }
 
     }
 
