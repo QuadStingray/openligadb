@@ -3,7 +3,7 @@ name := "openligadb"
 
 organization := "com.quadstingray"
 
-scalaVersion := "2.12.6"
+scalaVersion := "2.12.7"
 
 homepage := Some(url("https://github.com/QuadStingray/sbt-javafx"))
 
@@ -15,20 +15,22 @@ licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0"))
 
 // Tests
 libraryDependencies ++= Seq(
-  "org.specs2" %% "specs2-core" % "4.2.0" % "test",
+  "org.specs2" %% "specs2-core" % "4.3.5" % "test",
   "junit" % "junit" % "4.12" % "test"
 )
 
 // akka
 libraryDependencies ++= Seq(
-  "com.typesafe.akka" %% "akka-http" % "10.1.2",
-  "com.typesafe.akka" %% "akka-stream" % "2.5.13"
+  "com.typesafe.akka" %% "akka-http" % "10.1.5",
+  "com.typesafe.akka" %% "akka-stream" % "2.5.17"
 )
 
 libraryDependencies ++= Seq(
-  "org.json4s" %% "json4s-native" % "3.5.4",
-  "com.google.inject" % "guice" % "4.2.0",
-  "joda-time" % "joda-time" % "2.10"
+  "org.json4s" %% "json4s-native" % "3.6.1",
+  "com.google.inject" % "guice" % "4.2.1",
+  "joda-time" % "joda-time" % "2.10",
+  "org.scala-lang.modules" %% "scala-xml" % "1.1.0",
+  "org.json4s" %% "json4s-xml" % "3.6.1"
 )
 
 // Caching

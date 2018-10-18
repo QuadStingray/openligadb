@@ -114,7 +114,7 @@ class LeagueSpec extends org.specs2.mutable.Specification {
 
     "lastMatch where no next match exists" >> {
 
-      val league = League("WMTipp18")
+      val league = League("WMTipp18_1")
 
       val openLigaMatch = league.lastMatch
 

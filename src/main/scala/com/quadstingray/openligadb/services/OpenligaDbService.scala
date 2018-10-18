@@ -1,11 +1,10 @@
 package com.quadstingray.openligadb.services
 
-import javax.inject.Inject
-
 import com.quadstingray.openligadb._
 import com.quadstingray.openligadb.exceptions.NoMatchDataFoundException
-import org.json4s.DefaultFormats
+import javax.inject.Inject
 import org.json4s.native.Serialization.read
+import org.json4s.{DefaultFormats, MappingException}
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -82,7 +81,11 @@ private[openligadb] class OpenligaDbServiceImpementation @Inject()(httpService: 
     if (resultstring.equalsIgnoreCase("[]"))
       throw new NoMatchDataFoundException()
 
-    read[OpenligaDbMatch](resultstring)
+    try {
+      read[OpenligaDbMatch](resultstring)
+    } catch {
+      case e: MappingException => throw new NoMatchDataFoundException()
+    }
   }
 
   def getMatchdataByTeams(team1Id: Long, team2Id: Long): List[MatchData] = {

@@ -24,25 +24,42 @@ addons:
 jobs:
   include:
     - stage: SBT Test
+      name: "Test with Oracle JDK 8"
       language: scala
-      scala: 2.12.4
+      scala: 2.12.7
       os: linux
       jdk: oraclejdk8
       script: 'sbt test'
-    - scala: 2.12.4
+    - stage: SBT Test
+      name: "Test with OpenJDK 8"
       language: scala
+      scala: 2.12.7
       os: linux
       jdk: openjdk8
       script: 'sbt test'
+    - stage: SBT Test
+      name: "Test with Oracle JDK 11"
+      language: scala
+      scala: 2.12.7
+      os: linux
+      jdk: oraclejdk11
+      script: 'sbt test'
+    - stage: SBT Test
+      name: "Test with OpenJDK 11"
+      language: scala
+      scala: 2.12.7
+      os: linux
+      jdk: openjdk11
+      script: 'sbt test'
     - stage: SBT Publish
       language: scala
-      scala: 2.12.4
+      scala: 2.12.7
       os: linux
       jdk: oraclejdk8
       script: '/bin/bash "$TRAVIS_BUILD_DIR/.travis.publish.sh"'
     - stage: Release and Build Docu
       language: scala
-      scala: 2.12.4
+      scala: 2.12.7
       os: linux
       jdk: oraclejdk8
       script: '/bin/bash "$TRAVIS_BUILD_DIR/.travis.release.sh"'
