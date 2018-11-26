@@ -22,15 +22,19 @@ libraryDependencies ++= Seq(
 // akka
 libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-http" % "10.1.5",
-  "com.typesafe.akka" %% "akka-stream" % "2.5.17"
+  "com.typesafe.akka" %% "akka-stream" % "2.5.18"
+)
+
+val json4sVersion = "3.6.2"
+libraryDependencies ++= Seq(
+  "org.json4s" %% "json4s-native" % json4sVersion,
+  "org.json4s" %% "json4s-xml" % json4sVersion,
+  "org.scala-lang.modules" %% "scala-xml" % "1.1.1"
 )
 
 libraryDependencies ++= Seq(
-  "org.json4s" %% "json4s-native" % "3.6.1",
-  "com.google.inject" % "guice" % "4.2.1",
-  "joda-time" % "joda-time" % "2.10",
-  "org.scala-lang.modules" %% "scala-xml" % "1.1.0",
-  "org.json4s" %% "json4s-xml" % "3.6.1"
+  "com.google.inject" % "guice" % "4.2.2",
+  "joda-time" % "joda-time" % "2.10.1"
 )
 
 // Caching

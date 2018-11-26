@@ -92,7 +92,7 @@ class MatchDataSpec extends org.specs2.mutable.Specification {
 
       game.team1.id must beEqualTo(7)
 
-      game.team1.shortname must beEqualTo("BVB  09")
+      game.team1.shortname must beEqualTo("BVB")
 
       game.team1.iconUrl.contains("Borussia_Dortmund_logo") must beTrue
 

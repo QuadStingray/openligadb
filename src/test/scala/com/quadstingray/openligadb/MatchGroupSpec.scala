@@ -85,7 +85,7 @@ class MatchGroupSpec extends org.specs2.mutable.Specification {
 
       game.team1.name must beEqualTo("1. FSV Mainz 05")
 
-      game.team2.shortname must beEqualTo("BVB  09")
+      game.team2.shortname must beEqualTo("BVB")
 
       game.finalResult.get.scoreTeam1 must beEqualTo(0)
 
