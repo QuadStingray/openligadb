@@ -3,9 +3,9 @@ name := "openligadb"
 
 organization := "com.quadstingray"
 
-scalaVersion := "2.12.7"
+scalaVersion := "2.12.8"
 
-homepage := Some(url("https://github.com/QuadStingray/sbt-javafx"))
+homepage := Some(url("https://quadstingray.github.io/openligadb/"))
 
 scmInfo := Some(ScmInfo(url("https://github.com/QuadStingray/openligadb"), "https://github.com/QuadStingray/openligadb.git"))
 
@@ -15,17 +15,17 @@ licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0"))
 
 // Tests
 libraryDependencies ++= Seq(
-  "org.specs2" %% "specs2-core" % "4.3.5" % "test",
+  "org.specs2" %% "specs2-core" % "4.3.6" % "test",
   "junit" % "junit" % "4.12" % "test"
 )
 
 // akka
 libraryDependencies ++= Seq(
-  "com.typesafe.akka" %% "akka-http" % "10.1.5",
-  "com.typesafe.akka" %% "akka-stream" % "2.5.18"
+  "com.typesafe.akka" %% "akka-http" % "10.1.7",
+  "com.typesafe.akka" %% "akka-stream" % "2.5.19"
 )
 
-val json4sVersion = "3.6.2"
+val json4sVersion = "3.6.3"
 libraryDependencies ++= Seq(
   "org.json4s" %% "json4s-native" % json4sVersion,
   "org.json4s" %% "json4s-xml" % json4sVersion,
@@ -42,7 +42,7 @@ libraryDependencies += "com.github.blemale" %% "scaffeine" % "2.5.0"
 
 // Logging
 libraryDependencies ++= Seq(
-  "com.typesafe.scala-logging" %% "scala-logging" % "3.9.0",
+  "com.typesafe.scala-logging" %% "scala-logging" % "3.9.2",
   "ch.qos.logback" % "logback-classic" % "1.2.3"
 )
 
