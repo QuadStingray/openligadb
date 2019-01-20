@@ -1,11 +1,13 @@
 # openligadb
+This project is an Scala implementation for the [OpenligaDb API](https://www.openligadb.de/). At this point the documentation is not completed. When you can not find informaitons about the request you are interested in, take a look at the @ref:[tests](tests/index.md).
+At this Point there is an test for every implemented API request.
+
+## What is OpenligaDB
+OpenligaDB is an communitybased Sports API.
 
 ## Build Status
 [![Build Status](https://travis-ci.org/QuadStingray/openligadb.svg?branch=master)](https://travis-ci.org/QuadStingray/openligadb)
-[ ![Download from Bintray](https://api.bintray.com/packages/quadstingray/maven/openligadb/images/download.svg) ](https://bintray.com/quadstingray/maven/openligadb/_latestVersion)
-
-## Documentation
-https://quadstingray.github.io/openligadb/
+[![Download from Bintray](https://api.bintray.com/packages/quadstingray/maven/openligadb/images/download.svg) ](https://bintray.com/quadstingray/maven/openligadb/_latestVersion)
 
 ## Quick start
 Add to `build.sbt` the following content:
@@ -32,3 +34,10 @@ sbt-javafx is deployed on bintray (jcenter).
 
 ## Todos:
 - documentation
+
+@@@ index
+
+ - [League](first-steps.md)
+ - [Tests](tests/index.md)
+
+@@@

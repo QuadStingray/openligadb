@@ -6,7 +6,9 @@ class OpenligaServiceSpec extends org.specs2.mutable.Specification {
 
     "getAllAvailableLeagues" >> {
 
+      //#find-league
       val league = OpenligaDb.availableLeagues
+      //#find-league
 
       league.size must beGreaterThan(200)
 

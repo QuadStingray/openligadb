@@ -9,18 +9,22 @@ class LeagueSpec extends org.specs2.mutable.Specification {
 
     "getCurrentMatches must return List of 9 elements for bl1" >> {
 
+      //#first-requests-currentMatches
       val league = League("bl1")
 
       val matches = league.currentMatches
+      //#first-requests-currentMatches
 
       matches.size must equalTo(9)
     }
 
     "getCurrentSeason " >> {
 
+      //#first-requests-currentseason
       val league = League("bl1")
 
       val season = league.currentSeason
+      //#first-requests-currentseason
 
       val currentYear = new DateTime().getYear
 
@@ -32,7 +36,6 @@ class LeagueSpec extends org.specs2.mutable.Specification {
 
 
     "getSeason " >> {
-
       val league = League("bl1")
 
       val season = league.season(2015)
@@ -89,9 +92,11 @@ class LeagueSpec extends org.specs2.mutable.Specification {
 
     "nextMatch " >> {
 
+      //#first-requests-nextmatch
       val league = League("bl1")
 
-      val openLigaMatchOption = league.nextMatch
+      val openLigaMatchOption: Option[MatchData] = league.nextMatch
+      //#first-requests-nextmatch
 
       if (openLigaMatchOption.isDefined) {
         val openLigaMatch = openLigaMatchOption.get
