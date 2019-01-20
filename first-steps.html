@@ -20,7 +20,7 @@
 
 <meta name="description" content="openligadb">
 <link rel="shortcut icon" href="assets/images/favicon.png">
-<title>openligadb</title>
+<title>First Steps · openligadb</title>
 <link rel="stylesheet" href="assets/stylesheets/application.451f80e5.css">
 <link rel="stylesheet" href="assets/stylesheets/application-palette.22915126.css">
 <meta name="theme-color" content="#009688" />
@@ -56,7 +56,12 @@ data-md-color-accent="indigo"
 </div>
 <div class="md-flex__cell md-flex__cell--stretch">
 <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+<span class="md-header-nav__topic">
 openligadb
+</span>
+<span class="md-header-nav__topic">
+First Steps
+</span>
 </div>
 </div>
 <div class="md-flex__cell md-flex__cell--shrink">
@@ -134,7 +139,7 @@ QuadStingray/openligadb
 
 </div>
 <ul>
-  <li><a href="first-steps.html" class="page">First Steps</a>
+  <li><a href="first-steps.html" class="active page">First Steps</a>
   <ul>
     <li><a href="league/find-league.html" class="page">How to find your league</a></li>
   </ul></li>
@@ -152,15 +157,12 @@ QuadStingray/openligadb
 <nav class="md-nav md-nav--secondary">
 <label class="md-nav__title" for="__toc">Table of contents</label>
 <ul>
-  <li><a href="index.html#openligadb" class="header">openligadb</a>
+  <li><a href="first-steps.html#first-steps" class="header">First Steps</a>
   <ul>
-    <li><a href="index.html#what-is-openligadb" class="header">What is OpenligaDB</a></li>
-    <li><a href="index.html#build-status" class="header">Build Status</a></li>
-    <li><a href="index.html#quick-start" class="header">Quick start</a></li>
-    <li><a href="index.html#contributing" class="header">Contributing</a></li>
-    <li><a href="index.html#maven" class="header">maven</a></li>
-    <li><a href="index.html#licence" class="header">Licence</a></li>
-    <li><a href="index.html#todos-" class="header">Todos:</a></li>
+    <li><a href="first-steps.html#get-the-current-season" class="header">Get the Current Season</a></li>
+    <li><a href="first-steps.html#get-the-specific-season" class="header">Get the specific Season</a></li>
+    <li><a href="first-steps.html#get-the-current-matches" class="header">Get the current Matches</a></li>
+    <li><a href="first-steps.html#get-next-matches" class="header">Get next Matches</a></li>
   </ul></li>
 </ul>
 </nav>
@@ -182,15 +184,12 @@ QuadStingray/openligadb
 <nav class="md-nav md-nav--secondary">
 <label class="md-nav__title" for="__toc">Table of contents</label>
 <ul>
-  <li><a href="index.html#openligadb" class="header">openligadb</a>
+  <li><a href="first-steps.html#first-steps" class="header">First Steps</a>
   <ul>
-    <li><a href="index.html#what-is-openligadb" class="header">What is OpenligaDB</a></li>
-    <li><a href="index.html#build-status" class="header">Build Status</a></li>
-    <li><a href="index.html#quick-start" class="header">Quick start</a></li>
-    <li><a href="index.html#contributing" class="header">Contributing</a></li>
-    <li><a href="index.html#maven" class="header">maven</a></li>
-    <li><a href="index.html#licence" class="header">Licence</a></li>
-    <li><a href="index.html#todos-" class="header">Todos:</a></li>
+    <li><a href="first-steps.html#get-the-current-season" class="header">Get the Current Season</a></li>
+    <li><a href="first-steps.html#get-the-specific-season" class="header">Get the specific Season</a></li>
+    <li><a href="first-steps.html#get-the-current-matches" class="header">Get the current Matches</a></li>
+    <li><a href="first-steps.html#get-next-matches" class="header">Get next Matches</a></li>
   </ul></li>
 </ul>
 </nav>
@@ -201,29 +200,32 @@ QuadStingray/openligadb
 <div class="md-content">
 <article class="md-content__inner md-typeset">
 <div class="md-content__searchable">
-<h1><a href="#openligadb" name="openligadb" class="anchor"><span class="anchor-link"></span></a>openligadb</h1>
-<p>This project is an Scala implementation for the <a href="https://www.openligadb.de/">OpenligaDb API</a>. At this point the documentation is not completed. When you can not find informaitons about the request you are interested in, take a look at the <a href="tests/index.html">tests</a>. At this Point there is an test for every implemented API request.</p>
-<h2><a href="#what-is-openligadb" name="what-is-openligadb" class="anchor"><span class="anchor-link"></span></a>What is OpenligaDB</h2>
-<p>OpenligaDB is an communitybased Sports API.</p>
-<h2><a href="#build-status" name="build-status" class="anchor"><span class="anchor-link"></span></a>Build Status</h2>
-<p><a href="https://travis-ci.org/QuadStingray/openligadb"><img src="https://travis-ci.org/QuadStingray/openligadb.svg?branch=master" alt="Build Status" /></a> <a href="https://bintray.com/quadstingray/maven/openligadb/_latestVersion"><img src="https://api.bintray.com/packages/quadstingray/maven/openligadb/images/download.svg" alt="Download from Bintray" /> </a></p>
-<h2><a href="#quick-start" name="quick-start" class="anchor"><span class="anchor-link"></span></a>Quick start</h2>
+<h1><a href="#first-steps" name="first-steps" class="anchor"><span class="anchor-link"></span></a>First Steps</h1>
 <p>Add to <code>build.sbt</code> the following content:</p>
 <pre class="prettyprint"><code class="language-sbt">libraryDependencies += &quot;com.quadstingray&quot; % &quot;openligadb&quot; % &quot;0.7.3&quot;
 </code></pre>
-<h2><a href="#contributing" name="contributing" class="anchor"><span class="anchor-link"></span></a>Contributing</h2>
-<p>If you find this project helpfull, so you can see here how you can help: - Send a pull request with your features and bug fixes - Help users resolve their <a href="https://github.com/QuadStingray/openligadb/issues">issues</a>.</p>
-<h2><a href="#maven" name="maven" class="anchor"><span class="anchor-link"></span></a>maven</h2>
-<p>sbt-javafx is deployed on bintray (jcenter).</p>
-<h2><a href="#licence" name="licence" class="anchor"><span class="anchor-link"></span></a>Licence</h2>
-<p><a href="https://github.com/QuadStingray/openligadb/blob/master/LICENSE">Apache 2 License.</a></p>
-<h2><a href="#todos-" name="todos-" class="anchor"><span class="anchor-link"></span></a>Todos:</h2>
-<ul>
-  <li>documentation</li>
-</ul>
+<p>The first thing you need is the Id for the league you are interested in. How you can find the id? <a href="league/find-league.html">Take a look here.</a>. We take <code>bl1</code> (German Bundesliga) for our sample.</p>
+<p>So lets make some basic request!</p>
+<h2><a href="#get-the-current-season" name="get-the-current-season" class="anchor"><span class="anchor-link"></span></a>Get the Current Season</h2>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/QuadStingray/openligadb/tree/v0.7.3/src/test/scala/com/quadstingray/openligadb/LeagueSpec.scala#L24-L26" target="_blank" title="Go to snippet source"></a><code class="language-scala">val league = League(&quot;bl1&quot;)
+
+val season = league.currentSeason</code></pre>
+<h2><a href="#get-the-specific-season" name="get-the-specific-season" class="anchor"><span class="anchor-link"></span></a>Get the specific Season</h2>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/QuadStingray/openligadb/tree/v0.7.3/src/test/scala/com/quadstingray/openligadb/LeagueSpec.scala#L24-L26" target="_blank" title="Go to snippet source"></a><code class="language-scala">val league = League(&quot;bl1&quot;)
+
+val season = league.currentSeason</code></pre>
+<h2><a href="#get-the-current-matches" name="get-the-current-matches" class="anchor"><span class="anchor-link"></span></a>Get the current Matches</h2><div class="callout note "><div class="callout-title">Note</div>
+<p>The current day is increased in each case half the time between the last game of the last match day and the first game of the next match day.</p></div>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/QuadStingray/openligadb/tree/v0.7.3/src/test/scala/com/quadstingray/openligadb/LeagueSpec.scala#L13-L15" target="_blank" title="Go to snippet source"></a><code class="language-scala">val league = League(&quot;bl1&quot;)
+
+val matches = league.currentMatches</code></pre>
+<h2><a href="#get-next-matches" name="get-next-matches" class="anchor"><span class="anchor-link"></span></a>Get next Matches</h2>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/QuadStingray/openligadb/tree/v0.7.3/src/test/scala/com/quadstingray/openligadb/LeagueSpec.scala#L96-L98" target="_blank" title="Go to snippet source"></a><code class="language-scala">val league = League(&quot;bl1&quot;)
+
+val openLigaMatchOption: Option[MatchData] = league.nextMatch</code></pre>
 </div>
 <div>
-<a href="https://github.com/QuadStingray/openligadb/tree/v0.7.3/src/main/paradox/index.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/QuadStingray/openligadb/tree/v0.7.3/src/main/paradox/first-steps.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
@@ -239,13 +241,26 @@ Edit this page
 <footer class="md-footer">
 <div class="md-footer-nav">
 <nav class="md-footer-nav__inner md-grid">
-<a href="first-steps.html" title="First Steps" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<a href="index.html" title="openligadb" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+<i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+openligadb
+</span>
+</div>
+</a>
+<a href="league/find-league.html" title="How to find your league" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
 <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
 <span class="md-flex__ellipsis">
 <span class="md-footer-nav__direction">
 Next
 </span>
-First Steps
+How to find your league
 </span>
 </div>
 <div class="md-flex__cell md-flex__cell--shrink">
