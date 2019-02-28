@@ -15,17 +15,17 @@ licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0"))
 
 // Tests
 libraryDependencies ++= Seq(
-  "org.specs2" %% "specs2-core" % "4.3.6" % "test",
+  "org.specs2" %% "specs2-core" % "4.4.1" % "test",
   "junit" % "junit" % "4.12" % "test"
 )
 
 // akka
 libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-http" % "10.1.7",
-  "com.typesafe.akka" %% "akka-stream" % "2.5.19"
+  "com.typesafe.akka" %% "akka-stream" % "2.5.21"
 )
 
-val json4sVersion = "3.6.3"
+val json4sVersion = "3.6.5"
 libraryDependencies ++= Seq(
   "org.json4s" %% "json4s-native" % json4sVersion,
   "org.json4s" %% "json4s-xml" % json4sVersion,
